@@ -2,14 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Category;
-use App\Models\Tag;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Event extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'title',
@@ -23,15 +22,61 @@ class Event extends Model
         'category_id'
     ];
 
-    // ✅ FIX 1: category relationship
+    protected $casts = [
+        'start_time' => 'datetime',
+        'end_time' => 'datetime',
+        'status' => 'string',
+    ];
+
+    /* ======================
+        RELATIONSHIPS
+    ====================== */
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
 
-    // ✅ FIX 2: tags relationship
+    public function registrations()
+    {
+        return $this->hasMany(Registration::class);
+    }
+
     public function tags()
     {
-        return $this->belongsToMany(Tag::class);
+        return $this->belongsToMany(Tag::class, 'event_tag');
+    }
+
+    /* ======================
+        SCOPES
+    ====================== */
+
+    public function scopePublished($query)
+    {
+        return $query->where('status', 'published');
+    }
+
+    public function scopeUpcoming($query)
+    {
+        return $query->where('start_time', '>=', now());
+    }
+
+    public function scopeByCategory($query, $categoryId)
+    {
+        return $query->where('category_id', $categoryId);
+    }
+
+    /* ======================
+        ACCESSOR
+    ====================== */
+
+    public function getIsFullAttribute(): bool
+    {
+        return $this->registrations()->count() >= $this->capacity;
     }
 }

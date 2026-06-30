@@ -8,9 +8,9 @@ class EventController extends Controller
 {
     public function index()
     {
-        $events = Event::with(['tags', 'category'])
-            ->latest()
-            ->get();
+        $events = Event::with(['tags', 'category', 'user'])
+    ->latest()
+    ->get();
 
         return view('events.index', compact('events'));
     }
