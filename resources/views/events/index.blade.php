@@ -100,7 +100,7 @@
                         </p>
                         <p class="small">
                             📂 {{ $event->category->name ?? 'No category' }}
-                        </p>
+</p>
                         <p class="small">
                             👤 {{ $event->organizer->name ?? 'Unknown' }}
                         </p>
