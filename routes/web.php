@@ -8,6 +8,7 @@ use App\Http\Controllers\EventController;
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
+<<<<<<< HEAD
 */
 
 // Trang chủ
@@ -54,3 +55,15 @@ Route::get('/logout', function () {
 
 // Trang login tạm thời
 Route::view('/login', 'auth.login')->name('login');
+=======
+|
+| Here is where you can register web routes for your application.
+|
+*/
+
+// Trang chủ -> chuyển sang danh sách sự kiện
+Route::redirect('/', '/events');
+
+// Danh sách sự kiện
+Route::get('/events', [EventController::class, 'index']);
+>>>>>>> 651e64641248d7cad8cdf1914662b3b41735add4

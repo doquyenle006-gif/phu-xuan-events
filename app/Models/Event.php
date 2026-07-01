@@ -1,10 +1,17 @@
 <?php
 
 namespace App\Models;
+<<<<<<< HEAD
 use App\Models\User;
 use App\Models\Category;
 use App\Models\Registration;
 use App\Models\Tag;
+=======
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
+>>>>>>> 651e64641248d7cad8cdf1914662b3b41735add4
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -40,21 +47,30 @@ class Event extends Model
         RELATIONSHIPS
     ====================== */
 
+<<<<<<< HEAD
     public function user(): BelongsTo
+=======
+    public function user()
+>>>>>>> 651e64641248d7cad8cdf1914662b3b41735add4
     {
         return $this->belongsTo(User::class);
     }
 
+<<<<<<< HEAD
     public function organizer(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
     public function category(): BelongsTo
+=======
+    public function category()
+>>>>>>> 651e64641248d7cad8cdf1914662b3b41735add4
     {
         return $this->belongsTo(Category::class);
     }
 
+<<<<<<< HEAD
     public function registrations(): HasMany
     {
         return $this->hasMany(Registration::class);
@@ -62,6 +78,15 @@ class Event extends Model
 
     public function tags(): BelongsToMany
     {
+=======
+    public function registrations()
+    {
+        return $this->hasMany(Registration::class);
+    }
+
+    public function tags()
+    {
+>>>>>>> 651e64641248d7cad8cdf1914662b3b41735add4
         return $this->belongsToMany(Tag::class, 'event_tag');
     }
 
@@ -69,17 +94,29 @@ class Event extends Model
         SCOPES
     ====================== */
 
+<<<<<<< HEAD
     public function scopePublished(Builder $query): Builder
+=======
+    public function scopePublished($query)
+>>>>>>> 651e64641248d7cad8cdf1914662b3b41735add4
     {
         return $query->where('status', 'published');
     }
 
+<<<<<<< HEAD
     public function scopeUpcoming(Builder $query): Builder
+=======
+    public function scopeUpcoming($query)
+>>>>>>> 651e64641248d7cad8cdf1914662b3b41735add4
     {
         return $query->where('start_time', '>=', now());
     }
 
+<<<<<<< HEAD
     public function scopeByCategory(Builder $query, int $categoryId): Builder
+=======
+    public function scopeByCategory($query, $categoryId)
+>>>>>>> 651e64641248d7cad8cdf1914662b3b41735add4
     {
         return $query->where('category_id', $categoryId);
     }

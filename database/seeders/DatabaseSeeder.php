@@ -112,7 +112,7 @@ class DatabaseSeeder extends Seeder
                 'description' => fake()->paragraphs(3, true),
                 'location' => $locations[array_rand($locations)],
                 'start_time' => $start,
-                'end_time' => $end,
+'end_time' => $end,
                 'capacity' => [30, 50, 100, 200][array_rand([30, 50, 100, 200])],
                 'status' => rand(1, 10) <= 7 ? 'published' : 'draft',
                 'user_id' => $organizers[array_rand($organizers)],

@@ -12,6 +12,7 @@ class EventController extends Controller
 {
     public function __construct()
     {
+<<<<<<< HEAD
         $this->middleware('auth')->except(['index', 'show']);
     }
 
@@ -34,6 +35,11 @@ class EventController extends Controller
             )
             ->latest()
             ->paginate(12);
+=======
+        $events = Event::with(['tags', 'category', 'user'])
+    ->latest()
+    ->get();
+>>>>>>> 651e64641248d7cad8cdf1914662b3b41735add4
 
         return view('events.index', compact('events'));
     }
