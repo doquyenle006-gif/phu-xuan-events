@@ -124,4 +124,5 @@ class DatabaseSeeder extends Seeder
             $event->tags()->attach(array_slice($tagIds, 0, rand(2, 4)));
         }
     }
+    
 }
